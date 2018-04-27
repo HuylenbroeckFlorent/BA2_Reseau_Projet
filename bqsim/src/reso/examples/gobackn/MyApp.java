@@ -8,7 +8,7 @@ import reso.ip.IPHost;
 
 public class MyApp extends AbstractApplication{
 
-    public MyApp(IPHost host, IPAddress dst, ){
+    public MyApp(IPHost host, IPAddress dst){
 
     }
 
