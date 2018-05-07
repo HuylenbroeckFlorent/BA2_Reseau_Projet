@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bd66763-584f-4cb7-88a0-27c95484897f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/MyApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +19,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GoBackNApp.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GoBackNApp.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="135">
+              <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+              <folding>
+                <element signature="e#279#280#0" expanded="true" />
+                <element signature="e#320#321#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,17 +35,29 @@
       <file leaf-file-name="GoBackNMessage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+            <state relative-caret-position="150">
+              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+              <folding>
+                <element signature="e#179#180#0" expanded="true" />
+                <element signature="e#209#210#0" expanded="true" />
+                <element signature="e#240#241#0" expanded="true" />
+                <element signature="e#267#268#0" expanded="true" />
+                <element signature="e#311#312#0" expanded="true" />
+                <element signature="e#335#336#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoBackNACK.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GoBackNACK.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+            <state>
+              <caret column="25" selection-start-column="25" selection-end-column="25" />
+              <folding>
+                <element signature="e#150#151#0" expanded="true" />
+                <element signature="e#169#170#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,6 +80,8 @@
         <option value="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/MyApp.java" />
         <option value="$PROJECT_DIR$/bqsim/src/reso/examples/pingpong/AppReceiver.java" />
         <option value="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java" />
+        <option value="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java" />
+        <option value="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java" />
       </list>
     </option>
   </component>
@@ -403,24 +420,40 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/MyApp.java" />
-    <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java">
+    <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state>
+          <caret column="25" selection-start-column="25" selection-end-column="25" />
+          <folding>
+            <element signature="e#150#151#0" expanded="true" />
+            <element signature="e#169#170#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="4" lean-forward="true" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        <state relative-caret-position="150">
+          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding>
+            <element signature="e#179#180#0" expanded="true" />
+            <element signature="e#209#210#0" expanded="true" />
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#311#312#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNACK.java">
+    <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        <state relative-caret-position="135">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding>
+            <element signature="e#279#280#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

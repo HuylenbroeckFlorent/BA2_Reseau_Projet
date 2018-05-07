@@ -8,8 +8,9 @@ import reso.ip.IPHost;
 
 public class GoBackNApp extends AbstractApplication{
 
-    public MyApp(IPHost host, IPAddress dst){
-
+    public GoBackNApp(IPHost host, IPAddress dst)
+    {
+        super(host, "GoBackNApp");
     }
 
     public void start() {
