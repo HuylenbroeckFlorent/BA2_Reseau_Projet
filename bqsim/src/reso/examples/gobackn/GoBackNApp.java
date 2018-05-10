@@ -1,21 +1,22 @@
 package reso.examples.gobackn;
 
 import reso.common.AbstractApplication;
-import reso.examples.pingpong.PingPongProtocol;
 import reso.ip.IPAddress;
 import reso.ip.IPHost;
+import reso.ip.IPLayer;
 
-
-public class GoBackNApp extends AbstractApplication{
+public abstract class GoBackNApp extends AbstractApplication{
+    private final IPLayer ip;
+    private final IPAddress dst;
 
     public GoBackNApp(IPHost host, IPAddress dst)
     {
         super(host, "GoBackNApp");
+        this.dst= dst;
+        ip= host.getIPLayer();
     }
-
-    public void start() {
-        ip.addListener(PingPongProtocol.IP_PROTO_PINGPONG, new PingPongProtocol((IPHost) host));
-    }
-    public void stop() {}
+    public void messageReceived(){}
+    public void start(){}
+    public void stop(){}
 
 }
