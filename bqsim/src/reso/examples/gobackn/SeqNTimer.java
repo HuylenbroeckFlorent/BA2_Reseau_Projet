@@ -3,7 +3,7 @@ package reso.examples.gobackn;
 import java.util.Timer;
 
 /* Timer linked to a sequence number*/
-public class SeqNumTimer extends Timer {
+public class SeqNTimer extends Timer {
 
     private int seqN;
 

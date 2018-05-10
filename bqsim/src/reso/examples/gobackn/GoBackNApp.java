@@ -6,8 +6,8 @@ import reso.ip.IPHost;
 import reso.ip.IPLayer;
 
 public abstract class GoBackNApp extends AbstractApplication{
-    private final IPLayer ip;
-    private final IPAddress dst;
+    protected final IPLayer ip;
+    protected final IPAddress dst;
 
     public GoBackNApp(IPHost host, IPAddress dst)
     {
@@ -15,8 +15,8 @@ public abstract class GoBackNApp extends AbstractApplication{
         this.dst= dst;
         ip= host.getIPLayer();
     }
-    public void messageReceived(){}
-    public void start(){}
+    public void messageReceived(GoBackNMessage message){}
+    public void start() throws Exception{}
     public void stop(){}
 
 }
