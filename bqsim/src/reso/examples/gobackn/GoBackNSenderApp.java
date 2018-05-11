@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 public class GoBackNSenderApp extends GoBackNApp
 {
-    private static final long TIMEOUT_DELAY = 2500;
+    public static final long TIMEOUT_DELAY = 2500;
     private static final String APP_NAME = "[SENDER]:  " ;
     private static final String PACKET_SENT = "Packet sent:  " ;
     private static final String SLOW_START_THRESHOLD = "Slow start threshold value:  " ;
