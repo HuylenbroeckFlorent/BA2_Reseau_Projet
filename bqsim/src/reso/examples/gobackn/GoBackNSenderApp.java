@@ -5,7 +5,9 @@ import reso.ip.IPAddress;
 import reso.ip.IPHost;
 import reso.scheduler.AbstractScheduler;
 
-
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TimerTask;
@@ -23,7 +25,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private int windowEndIndex = 1;
     private int windowSize = 1;
     private int badACKCount = 0;
-    private final int MSG_AMMOUNT = 50;
+    private final int MSG_AMMOUNT = 10000;
     private final double SENDING_DELAY = 0.1;
 
 
@@ -36,9 +38,18 @@ public class GoBackNSenderApp extends GoBackNApp
     private final String ADD_INCREASE = "### ADDITIVE INCREASE ###";
     private final String EVENT_TRIPLE_ACK = "3 duplicate ACKs received > send again from window start";
     private final String EVENT_TIMEOUT = "Packet timeout > send again from window start";
+    private PrintWriter writer ;
 
     public GoBackNSenderApp(IPHost host, IPAddress dst) {
         super(host, dst);
+        try {
+            writer = new PrintWriter("reso/examples/gobackn/plot.txt", "UTF-8");
+            writer.println("0 " + windowSize);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -92,7 +103,8 @@ public class GoBackNSenderApp extends GoBackNApp
                 timerList.removeFirst();
                 timer = timerList.peekFirst();
             }
-
+            if(slowStart)
+                increaseWindow();
 
             if (seqN == MSG_AMMOUNT) {
                 for (SeqNTimer time : timerList) {
@@ -106,6 +118,7 @@ public class GoBackNSenderApp extends GoBackNApp
                 confirmWindow();
             windowEndIndex = seqN + windowSize;
             badACKCount = 0;
+            writer.println("" + seqN + " " + windowSize);
         }
         else{
             badACKCount += 1;
@@ -138,7 +151,7 @@ public class GoBackNSenderApp extends GoBackNApp
             slowStartThreshold =  Math.max(1, windowSize/2);
             windowSize =  Math.max(1, windowSize/2);
             windowEndIndex = windowStartIndex + windowSize - 1;
-            /* Affiche la taille de la fenêtre dans le log */
+
             System.out.println(APP_NAME + ADD_INCREASE +"\n"+ APP_NAME + WINDOW_SIZE + windowSize);
         }
     }
@@ -189,5 +202,6 @@ public class GoBackNSenderApp extends GoBackNApp
     @Override
     public void stop(){
         this.timer.stop();
+        writer.close();
     }
 }
