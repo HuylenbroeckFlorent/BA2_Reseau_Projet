@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TimerTask;
 
-public class GoBackNSenderApp extends GoBackNApp{
+public class GoBackNSenderApp extends GoBackNApp
+{
     private static final long TIMEOUT_DELAY = 2500;
     private static final String APP_NAME = "[SENDER]:  " ;
     private static final String PACKET_SENT = "Packet sent:  " ;
