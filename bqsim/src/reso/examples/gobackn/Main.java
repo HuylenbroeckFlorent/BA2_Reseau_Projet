@@ -41,7 +41,6 @@ public class Main {
             EthernetInterface h1_eth0= (EthernetInterface) host1.getInterfaceByName("eth0");
             EthernetInterface h2_eth0= (EthernetInterface) host2.getInterfaceByName("eth0");
 
-            // Connect both interfaces with a 5000km long link
             new Link<EthernetFrame>(h1_eth0, h2_eth0, LINK_SIZE, DEBIT);
 
             host1.start();
