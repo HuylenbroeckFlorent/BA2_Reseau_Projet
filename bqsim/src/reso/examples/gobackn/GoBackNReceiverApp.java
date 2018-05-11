@@ -8,12 +8,12 @@ import java.util.Random;
 public class GoBackNReceiverApp extends GoBackNApp{
 
     // Log Strings
-    private static final String LOG_APP_NAME = "[RECEIVER] -   ";
-    private static final String LOG_MESSAGE_RECEIVED = "Packet received:  ";
-    private static final String LOG_PACKET_OK = "packet is ok > sending ACK";
-    private static final String LOG_PACKET_LOST = "packet is ahead of current > sending last ok packet ACK";
-    private static final String LOG_PACKET_DUPLICATE = "packet already received > sending ACK again";
-    private static final String LOG_PACKET_CORRUPTED = "packet is corrupted > sending last ok packet ACK";
+    private static final String LOG_APP_NAME = "[RECEIVER] - ";
+    private static final String LOG_MESSAGE_RECEIVED = "Packet received: ";
+    private static final String LOG_PACKET_OK = " - packet is ok > sending ACK";
+    private static final String LOG_PACKET_LOST = " - packet is ahead of current > sending last ok packet ACK\n";
+    private static final String LOG_PACKET_DUPLICATE = " - packet already received > sending ACK again\n";
+    private static final String LOG_PACKET_CORRUPTED = " - packet is corrupted > sending last ok packet ACK\n";
 
     // Unexpected events probability (in percentage)
     private static final int PROB_ACK_NOT_SENT = 5;
@@ -30,7 +30,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private final Random rd = new Random();
 
 
-    // Current sequence number the app is tracking
+    // Current sequence number the app has checked
     private int curSeqN;
 
     public GoBackNReceiverApp(IPHost host, IPAddress dst) {
@@ -46,7 +46,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private boolean sendACK(int seqN){
         // Randomly decides not to send ACK
         if(rd.nextInt(100)<=PROB_ACK_NOT_SENT){
-            System.out.println("("+seqN+") ACK was lost");
+            System.out.println(LOG_APP_NAME+"("+seqN+") ACK was lost");
             return false;
         }
 
@@ -56,7 +56,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
 
         // ACK is randomly delayed (small delay)
         if(rd.nextInt(100)<=PROB_ACK_DELAYED){
-            System.out.println("("+seqN+") ACK got delayed");
+            System.out.println(LOG_APP_NAME+"("+seqN+") ACK got delayed");
             try {
                 Thread.sleep(rd.nextInt(SMALL_DELAY_RANGE_MAX-SMALL_DELAY_RANGE_MIN) + SMALL_DELAY_RANGE_MIN);
             }catch(InterruptedException ie){
@@ -65,7 +65,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         }
         // ACK is randomly sent after time-out
         else if(rd.nextInt(100)<=PROB_ACK_TIMED_OUT){
-            System.out.print("("+seqN+") ACK got hugely delayed");
+            System.out.print(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed");
              try{
                  Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
              }catch(InterruptedException ie2){
@@ -76,7 +76,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         // Sends ACK
         try {
             ip.send(IPAddress.ANY, dst, GoBackNProtocol.IP_PROTO_GOBACKN, ack);
-            System.out.println("("+seqN+") ACK sent");
+            System.out.println(LOG_APP_NAME+"("+seqN+") ACK sent");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,13 +112,13 @@ public class GoBackNReceiverApp extends GoBackNApp{
         // Received packet has already been received
         else if(seqN<curSeqN+1){
             System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_DUPLICATE);
-            this.sendACK(curSeqN+1);
+            this.sendACK(seqN);
         }
 
         // Received packet is ahead of currently awaited packet (means at least one packet has been lost)
         else{
             System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_LOST);
-            this.sendACK(curSeqN+1);
+            this.sendACK(curSeqN);
         }
     }
 
