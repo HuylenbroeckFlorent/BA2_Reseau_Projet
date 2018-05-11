@@ -130,7 +130,7 @@ public class GoBackNSenderApp extends GoBackNApp{
         ip.addListener(GoBackNProtocol.IP_PROTO_GOBACKN, new GoBackNProtocol((IPHost) host, this));
         /* generating message to send */
         for(int i = 1; i<=MSG_AMMOUNT; i++) {
-            GoBackNMessage msg = new GoBackNPacket(i);
+            GoBackNMessage msg = new GoBackNMessage(i);
             msgList.add(msg);
         }
         System.out.println(APP_NAME + WINDOW_SIZE + windowSize);

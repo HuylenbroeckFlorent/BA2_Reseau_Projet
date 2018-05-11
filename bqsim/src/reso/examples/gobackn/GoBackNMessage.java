@@ -2,7 +2,7 @@ package reso.examples.gobackn;
 
 import reso.common.Message;
 
-public abstract class GoBackNMessage implements Message
+public class GoBackNMessage implements Message
 {
     private final int seqN;
 

@@ -13,7 +13,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
     }
 
     private void sendACK(int seqN) {
-        final GoBackNACK ack = new GoBackNACK(seqN);
+        final GoBackNMessage ack = new GoBackNMessage(seqN);
         try {
             ip.send(IPAddress.ANY, dst, GoBackNProtocol.IP_PROTO_GOBACKN, ack);
         } catch (Exception e) {
