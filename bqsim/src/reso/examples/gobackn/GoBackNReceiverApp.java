@@ -17,7 +17,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private static final int PROB_ACK_TIMED_OUT = 3;
     private static final int PROB_PACKET_LOST = 3;
     private static final int PROB_PACKET_CORRUPTED = 3;
-    private static final int NUMBER_OF_EVENTS = 100;
+    private static final int NUMBER_OF_EVENT = 100;
 
     // Small delay range (in ms)
     private static final int SMALL_DELAY_RANGE_MIN = 50;
