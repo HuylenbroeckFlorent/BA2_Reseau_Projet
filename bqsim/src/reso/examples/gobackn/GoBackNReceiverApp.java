@@ -8,7 +8,7 @@ import java.util.Random;
 public class GoBackNReceiverApp extends GoBackNApp{
 
     // Log Strings
-    private static final String LOG_APP_NAME = "[RECEIVER] - ";
+    private static final String LOG_APP_NAME = "[RECEIVER] ";
     private static final String LOG_MESSAGE_RECEIVED = "Packet received: ";
     private static final String LOG_PACKET_OK = " - packet is ok > sending ACK";
     private static final String LOG_PACKET_LOST = " - packet is ahead of current > sending last ok packet ACK\n";
