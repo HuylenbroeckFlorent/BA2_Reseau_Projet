@@ -15,6 +15,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private static final long TIMEOUT_DELAY = 2500;
     private static final String APP_NAME = "[SENDER]:  " ;
     private static final String PACKET_SENT = "Packet sent:  " ;
+    private static final String SLOW_START_THRESHOLD = "Slow start threshold value:  " ;
     private LinkedList<SeqNTimer> timerList = new LinkedList<SeqNTimer>();
     private int windowCurrentIndex = 1;
     private ArrayList<GoBackNMessage> msgList = new ArrayList<GoBackNMessage>();
@@ -29,6 +30,12 @@ public class GoBackNSenderApp extends GoBackNApp
     private GoBackNTimer timer;
     private String WINDOW_SIZE = "Congestion window size:  ";
     private int confirmWindow = 1;
+    private boolean slowStart = true;
+    private final String SLOW_START= "### SLOW START ###";
+    private int slowStartThreshold = 7;
+    private final String ADD_INCREASE = "### ADDITIVE INCREASE ###";
+    private final String EVENT_TRIPLE_ACK = "3 duplicate ACKs receivedd ==> send again from window start";
+    private final String EVENT_TIMEOUT = "Packet timeout ==> send again from window start";
 
     public GoBackNSenderApp(IPHost host, IPAddress dst) {
         super(host, dst);
@@ -48,7 +55,6 @@ public class GoBackNSenderApp extends GoBackNApp
 
             if (windowCurrentIndex <= MSG_AMMOUNT  && windowCurrentIndex <= windowEndIndex  ) {
                 final GoBackNMessage msg = msgList.get(windowCurrentIndex - 1);
-                System.out.println("OK");
                 try {
                     /* Sending Packet */
 
@@ -59,7 +65,7 @@ public class GoBackNSenderApp extends GoBackNApp
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            //lossEvent(true);    TODO quand on aura mis les pertes de paquets
+                            lossEvent(true);
                             this.cancel();
                         }
                     }, TIMEOUT_DELAY);
@@ -105,12 +111,38 @@ public class GoBackNSenderApp extends GoBackNApp
             badACKCount += 1;
             if(badACKCount >= 3){
                 badACKCount = 0;
-                // lossEvent(false);   TODO quand on aura mis les pertes de paquets
+                lossEvent(false);
             }
         }
 
 
     }
+
+    private void lossEvent(boolean timeout) {
+        for(SeqNTimer timer: timerList)
+            timer.cancel();
+        windowCurrentIndex = windowStartIndex;
+        if(timeout) {
+            System.out.println(APP_NAME + EVENT_TIMEOUT);
+            slowStart = true;
+            slowStartThreshold = Math.max(1, windowSize/2);
+            windowSize = 1;
+            windowEndIndex = windowStartIndex;
+
+            System.out.println(APP_NAME + SLOW_START + WINDOW_SIZE + windowSize);
+        }
+        /* 3 ack */
+        else {
+            System.out.println(APP_NAME + EVENT_TRIPLE_ACK);
+            slowStart = false;
+            slowStartThreshold =  Math.max(1, windowSize/2);
+            windowSize =  Math.max(1, windowSize/2);
+            windowEndIndex = windowStartIndex + windowSize - 1;
+            /* Affiche la taille de la fenêtre dans le log */
+            System.out.println(APP_NAME + ADD_INCREASE + WINDOW_SIZE + windowSize);
+        }
+    }
+
     private void increaseWindow() {
         windowSize ++;
         windowEndIndex++;
@@ -119,7 +151,20 @@ public class GoBackNSenderApp extends GoBackNApp
     }
 
     private void confirmWindow() {
-        increaseWindow();
+        if(windowSize >= slowStartThreshold){
+            if(slowStart){
+                System.out.println(APP_NAME + ADD_INCREASE);
+            }
+            else{
+                increaseWindow();
+            }
+            slowStart = false;
+        }
+        else{
+            if(!slowStart)
+                System.out.println(APP_NAME + SLOW_START);
+            slowStart = true;
+        }
         confirmWindow = windowStartIndex + windowSize -1;
     }
 
@@ -135,7 +180,8 @@ public class GoBackNSenderApp extends GoBackNApp
             msgList.add(msg);
         }
         System.out.println(APP_NAME + WINDOW_SIZE + windowSize);
-        System.out.println(APP_NAME + " sending " + MSG_AMMOUNT + " packets" + '\n');
+        System.out.println(APP_NAME + SLOW_START_THRESHOLD + slowStartThreshold);
+        System.out.println(APP_NAME + "sending " + MSG_AMMOUNT + " packets" + "\n\n");
         /* Initializing sending packets timer */
         this.timer = new GoBackNTimer(host.getNetwork().getScheduler(), SENDING_DELAY);
         this.timer.start();

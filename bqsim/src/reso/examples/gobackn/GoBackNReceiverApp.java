@@ -61,6 +61,8 @@ public class GoBackNReceiverApp extends GoBackNApp{
         else if(rd.nextInt(100)<=PROB_ACK_TIMED_OUT){
              try{
                  Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
+             }catch(InterruptedException ie2){
+                 ie2.PrintStackTrace();
              }
         }
 

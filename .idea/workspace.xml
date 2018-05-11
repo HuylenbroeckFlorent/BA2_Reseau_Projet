@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5bd66763-584f-4cb7-88a0-27c95484897f" name="Default" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNReceiverApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNReceiverApp.java" afterDir="false" />
+=======
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
       <change beforePath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNSenderApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNSenderApp.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -39,8 +42,13 @@
       <file leaf-file-name="GoBackNReceiverApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNReceiverApp.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="-120">
               <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+=======
+            <state relative-caret-position="198">
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,15 +59,29 @@
       <file leaf-file-name="GoBackNProtocol.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNProtocol.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="120">
               <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+=======
+            <state relative-caret-position="352">
+              <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#530#541#0" expanded="true" />
+                <element signature="e#646#662#0" expanded="true" />
+                <element signature="e#1966#2247#0" expanded="true" />
+                <element signature="e#2246#2247#0" expanded="true" />
+                <element signature="e#4638#4639#0" expanded="true" />
+                <element signature="e#4671#4672#0" expanded="true" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="GoBackNMessage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNMessage.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -69,6 +91,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -84,6 +108,8 @@
       <find>Scheduler</find>
       <find>enable</find>
       <find>sending</find>
+      <find>OK</find>
+      <find>add_in</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -116,10 +142,18 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-40" />
     <option name="width" value="992" />
     <option name="height" value="555" />
+=======
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-6" />
+    <option name="y" value="42" />
+    <option name="width" value="1932" />
+    <option name="height" value="1044" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -250,12 +284,20 @@
       <workItem from="1524812631892" duration="3271000" />
       <workItem from="1525962116293" duration="623000" />
       <workItem from="1525977453936" duration="11021000" />
-      <workItem from="1526039603668" duration="778000" />
+      <workItem from="1526039603668" duration="4150000" />
     </task>
+    <task id="LOCAL-00001" summary="Delete uselesss class">
+      <created>1526040549663</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1526040549664</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15693000" />
+    <option name="totallyTimeSpent" value="19065000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -272,18 +314,32 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32978722" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Messages" weight="0.328594" />
+=======
+      <window_info anchor="bottom" id="Messages" weight="0.32978722" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32946634" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Run" order="2" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.328594" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22578125" />
+=======
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32978722" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21922246" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32978722" />
+      <window_info id="Learn" order="3" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -360,6 +416,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/bqsim" />
     </ignored-roots>
+    <MESSAGE value="Delete uselesss class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete uselesss class" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/ip/IPInterfaceListener.java">
@@ -465,6 +523,8 @@
             <element signature="e#646#662#0" expanded="true" />
             <element signature="e#1966#2247#0" expanded="true" />
             <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#4638#4639#0" expanded="true" />
+            <element signature="e#4671#4672#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -672,8 +732,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNProtocol.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="120">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+=======
+        <state relative-caret-position="88">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -682,8 +747,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNReceiverApp.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-120">
           <caret line="19" column="52" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+=======
+        <state relative-caret-position="198">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -692,14 +762,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bqsim/src/reso/examples/gobackn/GoBackNSenderApp.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="165">
           <caret line="14" column="11" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="11" />
+=======
+        <state relative-caret-position="352">
+          <caret line="16" column="70" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="70" />
+>>>>>>> 6d8ea7e26c7ffa33f6f9c398990262abf44c6a26
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#530#541#0" expanded="true" />
             <element signature="e#646#662#0" expanded="true" />
             <element signature="e#1966#2247#0" expanded="true" />
             <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#4638#4639#0" expanded="true" />
+            <element signature="e#4671#4672#0" expanded="true" />
           </folding>
         </state>
       </provider>
