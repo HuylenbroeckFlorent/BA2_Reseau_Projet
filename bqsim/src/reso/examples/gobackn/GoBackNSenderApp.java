@@ -129,7 +129,7 @@ public class GoBackNSenderApp extends GoBackNApp
             windowSize = 1;
             windowEndIndex = windowStartIndex;
 
-            System.out.println(APP_NAME + SLOW_START + WINDOW_SIZE + windowSize);
+            System.out.println(APP_NAME + SLOW_START + "\n" + APP_NAME + WINDOW_SIZE + windowSize);
         }
         /* 3 ack */
         else {
@@ -139,7 +139,7 @@ public class GoBackNSenderApp extends GoBackNApp
             windowSize =  Math.max(1, windowSize/2);
             windowEndIndex = windowStartIndex + windowSize - 1;
             /* Affiche la taille de la fenêtre dans le log */
-            System.out.println(APP_NAME + ADD_INCREASE + WINDOW_SIZE + windowSize);
+            System.out.println(APP_NAME + ADD_INCREASE +"\n"+ APP_NAME + WINDOW_SIZE + windowSize);
         }
     }
 

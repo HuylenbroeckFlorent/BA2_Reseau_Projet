@@ -11,9 +11,9 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private static final String LOG_APP_NAME = "[RECEIVER] ";
     private static final String LOG_MESSAGE_RECEIVED = "Packet received: ";
     private static final String LOG_PACKET_OK = " - packet is ok > sending ACK";
-    private static final String LOG_PACKET_LOST = " - packet is ahead of current > sending last ok packet ACK\n";
-    private static final String LOG_PACKET_DUPLICATE = " - packet already received > sending ACK again\n";
-    private static final String LOG_PACKET_CORRUPTED = " - packet is corrupted > sending last ok packet ACK\n";
+    private static final String LOG_PACKET_LOST = " - packet is ahead of current > sending last ok packet ACK";
+    private static final String LOG_PACKET_DUPLICATE = " - packet already received > sending ACK again";
+    private static final String LOG_PACKET_CORRUPTED = " - packet is corrupted > sending last ok packet ACK";
 
     // Unexpected events probability (in percentage)
     private static final int PROB_ACK_NOT_SENT = 5;
@@ -65,7 +65,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         }
         // ACK is randomly sent after time-out
         else if(rd.nextInt(100)<=PROB_ACK_TIMED_OUT){
-            System.out.print(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed");
+            System.out.println(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed");
              try{
                  Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
              }catch(InterruptedException ie2){
