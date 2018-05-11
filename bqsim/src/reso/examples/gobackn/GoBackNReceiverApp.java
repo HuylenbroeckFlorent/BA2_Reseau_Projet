@@ -21,7 +21,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
 
     // Small delay range (in ms)
     private static final int SMALL_DELAY_RANGE_MIN = 50;
-    private static final int SMALL_DELAY_RANGE_MAX = 300;
+    private static final int SMALL_DELAY_RANGE_MAX = 100;
 
     // Random, to simulate packet loss, packet timeouts, random ACK sending delay, ...
     private final Random rd = new Random();
@@ -64,7 +64,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         else if(rd.nextInt(NUMBER_OF_EVENT)<=PROB_ACK_TIMED_OUT){
             System.out.println(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed (delay>timeout)");
              try{
-                 Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
+                 Thread.sleep(GoBackNSenderApp.getTimeoutDelay());
              }catch(InterruptedException ie2){
                  ie2.printStackTrace();
              }

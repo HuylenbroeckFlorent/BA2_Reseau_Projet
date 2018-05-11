@@ -8,14 +8,12 @@ import reso.scheduler.AbstractScheduler;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TimerTask;
 public class GoBackNSenderApp extends GoBackNApp
 {
-    public static final long TIMEOUT_DELAY = 2500;
+    private static final long TIMEOUT_DELAY = 1000;
     private static final String APP_NAME = "[SENDER]  " ;
     private static final String PACKET_SENT = "Packet sent:  " ;
     private static final String SLOW_START_THRESHOLD = "Slow start threshold value:  " ;
@@ -26,7 +24,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private int windowEndIndex = 1;
     private int windowSize = 1;
     private int badACKCount = 0;
-    private final int MSG_AMMOUNT = 1000;
+    private final int MSG_AMMOUNT = 10000;
     private final double SENDING_DELAY = 0.1;
 
 
@@ -40,7 +38,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private final String EVENT_TRIPLE_ACK = "3 duplicate ACKs received > send again from window start";
     private final String EVENT_TIMEOUT = "Packet timeout > send again from window start";
     private PrintWriter writer ;
-    private Instant beginTime;
+    private long beginTime;
 
     public GoBackNSenderApp(IPHost host, IPAddress dst) {
         super(host, dst);
@@ -52,10 +50,12 @@ public class GoBackNSenderApp extends GoBackNApp
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        beginTime= Instant.now();
+        beginTime= System.currentTimeMillis();
     }
 
-
+    public static long getTimeoutDelay(){
+        return TIMEOUT_DELAY;
+    }
     public class GoBackNTimer extends AbstractTimer {
 
 
@@ -121,7 +121,7 @@ public class GoBackNSenderApp extends GoBackNApp
                 confirmWindow();
             windowEndIndex = seqN + windowSize;
             badACKCount = 0;
-            double deltaTime = Duration.between(beginTime, Instant.now()).getSeconds();
+            double deltaTime = (System.currentTimeMillis() - beginTime)/ 1000.0;
             writer.println("" + deltaTime + " " + windowSize);
         }
         else{
