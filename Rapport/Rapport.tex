@@ -1,15 +1,9 @@
-% !TeX spellcheck = fr_FR
 \documentclass[]{article}
-% Use utf-8 encoding for foreign characters
 \usepackage[utf8]{inputenc}
-% Setup for fullpage use
 \usepackage{fullpage}
-\usepackage{graphicx}
-%\usepackage[francais]{babel}
-\usepackage{times}
-\usepackage{rotate}
-\usepackage{lscape}
 \usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{amsmath}
 
 \begin{document}
 
@@ -29,4 +23,24 @@ Faculté des Sciences, Université de Mons}
 \maketitle
 %---------------------------------------------------------------------------------------------------------
 \newpage
+\section{Utilisation de l'application}
+\subsection{Lancement de l'application}
+Pour démarrer l'application, lancer le fichier Main.java du package \emph{reso.examples.gobackn}.
+\subsection{Paramètres modifiables}
+\begin{itemize}
+\item \emph{reso.examples.gobackn.GoBackNReceiverApp.java}\\
+\begin{itemize}
+\item NUMBER\_ OF\_ EVENT et les variables commençant par PROB\_ permettent de modifier les probabilités que des évènements inattendus se produisent, selon la formule : \[\frac{\text{PROB\_ EVENT}}{\text{NUMBER\_ OF\_ EVENT}}\]\\
+\emph{exemple} : Si l'on souhaite que $5\%$ des ACK ne soient pas envoyés,\\ PROB\_ ACK\_ NOT\_ SENT=5; et NUMBER\_ OF\_ EVENT=100;\\\\
+La variable NUMBER\_ OF\_ EVENT sert principalement à augmenter/réduire toutes les probabilités en une seule fois.
+\item SMALL\_ DELAY\_ RANGE\_ MIN et SMALL\_ DELAY\_ RANGE\_ MAX correspondent à l'intervalle dans lequel sera choisi les petits délais aléatoires avant d'envoyer certains ACK.\\
+\end{itemize}
+\item \emph{reso.examples.gobackn.GoBackNSenderApp.java}\\
+\begin{itemize}
+\item TIMEOUT\_ DELAY modifie le délai avant un timeout.
+\item PACKET\_ SENT modifie le nombre de paquets à envoyer.
+\end{itemize}
+\end{itemize}
+\subsection{Comportement de l'application}
+Une fois démarrée, une série de log s'afficheront dans la console, détaillant étape par étape l'échange de paquet au sein de l'application.
 \end{document}

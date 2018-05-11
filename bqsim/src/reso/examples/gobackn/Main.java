@@ -14,6 +14,8 @@ import reso.utilities.NetworkBuilder;
 
 public class Main {
     private static final boolean ENABLE_SNIFFER= false;
+    private static final int LINK_SIZE=5000000;
+    private static final int DEBIT=100000;
     public static void main(String [] args) {
         AbstractScheduler scheduler= new Scheduler();
         Network network= new Network(scheduler);
@@ -40,7 +42,7 @@ public class Main {
             EthernetInterface h2_eth0= (EthernetInterface) host2.getInterfaceByName("eth0");
 
             // Connect both interfaces with a 5000km long link
-            new Link<EthernetFrame>(h1_eth0, h2_eth0, 5000000, 100000);
+            new Link<EthernetFrame>(h1_eth0, h2_eth0, LINK_SIZE, DEBIT);
 
             host1.start();
             host2.start();
