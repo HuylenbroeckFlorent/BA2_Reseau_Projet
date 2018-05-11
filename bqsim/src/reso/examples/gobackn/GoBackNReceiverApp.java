@@ -11,12 +11,13 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private static final String LOG_APP_NAME = "[RECEIVER] ";
     private static final String LOG_PACKET_RECEIVED = "Packet received: ";
 
-    // Unexpected events probability (in percentage)
+    // Unexpected events probability (PROB_X / NUMBER_OF_EVENT)
     private static final int PROB_ACK_NOT_SENT = 5;
     private static final int PROB_ACK_DELAYED = 15;
     private static final int PROB_ACK_TIMED_OUT = 3;
     private static final int PROB_PACKET_LOST = 3;
     private static final int PROB_PACKET_CORRUPTED = 3;
+    private static final int NUMBER_OF_EVENTS = 100;
 
     // Small delay range (in ms)
     private static final int SMALL_DELAY_RANGE_MIN = 50;
@@ -41,7 +42,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
      */
     private boolean sendACK(int seqN){
         // Randomly decides not to send ACK
-        if(rd.nextInt(100)<=PROB_ACK_NOT_SENT){
+        if(rd.nextInt(NUMBER_OF_EVENTS)<=PROB_ACK_NOT_SENT){
             System.out.println(LOG_APP_NAME+"("+seqN+") ACK was lost");
             return false;
         }
@@ -51,7 +52,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         final GoBackNMessage ack = new GoBackNMessage(seqN);
 
         // ACK is randomly delayed (small delay)
-        if(rd.nextInt(100)<=PROB_ACK_DELAYED){
+        if(rd.nextInt(NUMBER_OF_EVENTS)<=PROB_ACK_DELAYED){
             System.out.println(LOG_APP_NAME+"("+seqN+") ACK got delayed");
             try {
                 Thread.sleep(rd.nextInt(SMALL_DELAY_RANGE_MAX-SMALL_DELAY_RANGE_MIN) + SMALL_DELAY_RANGE_MIN);
@@ -60,7 +61,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
                 }
         }
         // ACK is randomly sent after time-out
-        else if(rd.nextInt(100)<=PROB_ACK_TIMED_OUT){
+        else if(rd.nextInt(NUMBER_OF_EVENTS)<=PROB_ACK_TIMED_OUT){
             System.out.println(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed (delay>timeout)");
              try{
                  Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
@@ -89,10 +90,10 @@ public class GoBackNReceiverApp extends GoBackNApp{
         if(seqN==this.curSeqN+1){
 
             // Randomly loses the packet
-            if(rd.nextInt(100)<=PROB_PACKET_LOST){return;}
+            if(rd.nextInt(NUMBER_OF_EVENTS)<=PROB_PACKET_LOST){return;}
 
             // Packet is randomly corrupted
-            if(rd.nextInt(100)<=PROB_PACKET_CORRUPTED){
+            if(rd.nextInt(NUMBER_OF_EVENTS)<=PROB_PACKET_CORRUPTED){
                 System.out.println(LOG_APP_NAME+ LOG_PACKET_RECEIVED +seqN+" - packet is corrupted > sending last OK packet ACK");
                 sendACK(curSeqN);
                 return;
