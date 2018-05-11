@@ -7,17 +7,13 @@ import java.util.Random;
 
 public class GoBackNReceiverApp extends GoBackNApp{
 
-    // Log Strings
+    // Strings used multiple time
     private static final String LOG_APP_NAME = "[RECEIVER] ";
-    private static final String LOG_MESSAGE_RECEIVED = "Packet received: ";
-    private static final String LOG_PACKET_OK = " - packet is ok > sending ACK";
-    private static final String LOG_PACKET_LOST = " - packet is ahead of current > sending last ok packet ACK";
-    private static final String LOG_PACKET_DUPLICATE = " - packet already received > sending ACK again";
-    private static final String LOG_PACKET_CORRUPTED = " - packet is corrupted > sending last ok packet ACK";
+    private static final String LOG_PACKET_RECEIVED = "Packet received: ";
 
     // Unexpected events probability (in percentage)
     private static final int PROB_ACK_NOT_SENT = 5;
-    private static final int PROB_ACK_DELAYED = 25;
+    private static final int PROB_ACK_DELAYED = 15;
     private static final int PROB_ACK_TIMED_OUT = 3;
     private static final int PROB_PACKET_LOST = 3;
     private static final int PROB_PACKET_CORRUPTED = 3;
@@ -26,14 +22,14 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private static final int SMALL_DELAY_RANGE_MIN = 50;
     private static final int SMALL_DELAY_RANGE_MAX = 300;
 
-    // Random, to simulate packet loss, packet time-outs, random ACK sending delay, ...
+    // Random, to simulate packet loss, packet timeouts, random ACK sending delay, ...
     private final Random rd = new Random();
 
 
     // Current sequence number the app has checked
     private int curSeqN;
 
-    public GoBackNReceiverApp(IPHost host, IPAddress dst) {
+    GoBackNReceiverApp(IPHost host, IPAddress dst) {
         super(host, dst);
         curSeqN=0;
     }
@@ -65,7 +61,7 @@ public class GoBackNReceiverApp extends GoBackNApp{
         }
         // ACK is randomly sent after time-out
         else if(rd.nextInt(100)<=PROB_ACK_TIMED_OUT){
-            System.out.println(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed");
+            System.out.println(LOG_APP_NAME+"("+seqN+") ACK got hugely delayed (delay>timeout)");
              try{
                  Thread.sleep(GoBackNSenderApp.TIMEOUT_DELAY);
              }catch(InterruptedException ie2){
@@ -93,31 +89,30 @@ public class GoBackNReceiverApp extends GoBackNApp{
         if(seqN==this.curSeqN+1){
 
             // Randomly loses the packet
-            if(rd.nextInt(100)<=PROB_PACKET_LOST)
-                return;
+            if(rd.nextInt(100)<=PROB_PACKET_LOST){return;}
 
             // Packet is randomly corrupted
             if(rd.nextInt(100)<=PROB_PACKET_CORRUPTED){
-                System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_CORRUPTED);
-                sendACK(this.curSeqN);
+                System.out.println(LOG_APP_NAME+ LOG_PACKET_RECEIVED +seqN+" - packet is corrupted > sending last OK packet ACK");
+                sendACK(curSeqN);
                 return;
             }
 
             // Packet is OK, sends ACK
-            System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_OK);
+            System.out.println(LOG_APP_NAME+ LOG_PACKET_RECEIVED +seqN+" - packet is OK > sending ACK");
             if(sendACK(seqN))
                 curSeqN++;
         }
 
         // Received packet has already been received
         else if(seqN<curSeqN+1){
-            System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_DUPLICATE);
+            System.out.println(LOG_APP_NAME+ LOG_PACKET_RECEIVED +seqN+" - packet already received > sending ACK again");
             this.sendACK(seqN);
         }
 
         // Received packet is ahead of currently awaited packet (means at least one packet has been lost)
         else{
-            System.out.println(LOG_APP_NAME+LOG_MESSAGE_RECEIVED+seqN+LOG_PACKET_LOST);
+            System.out.println(LOG_APP_NAME+ LOG_PACKET_RECEIVED +seqN+" - packet is ahead of current > sending last OK packet ACK");
             this.sendACK(curSeqN);
         }
     }
