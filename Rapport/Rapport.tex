@@ -8,7 +8,9 @@
 \begin{document}
 
 \title{
-{\Huge Rapport de projet n\degree 1}\\
+{Rapport de projet}\\
+\smallskip
+{\Huge Go-back-N \& Congestion}\\
 Réseau I\\
 \author{Membres du groupe:\\
 \textbf{SAHLI Yacine}\\
@@ -23,9 +25,27 @@ Faculté des Sciences, Université de Mons}
 \maketitle
 %---------------------------------------------------------------------------------------------------------
 \newpage
+\section{Implémentation}
+\subsection{L'application}
+\subsection{Génération d'évènements aléatoires}
+Problèmes simulés aléatoirement (voir "Paramètres modifiables" pour les probabilités de ceux-ci) et comportement de l'application lorsqu'il surviennent:
+\begin{itemize}
+\item \textbf{Ajout d'un court délai à certains ACK.}\\
+Le thread est endormi pendant un nombre paramétrable de millisecondes avant l'envoi de l'ACK.
+\item \textbf{Ajout d'un délai supérieur à la valeur du timeout à certains ACK.}\\
+Le thread est endormi pendant un nombre non-paramétrable de millisecondes (correspondant au\\ TIMEOUT\_ DELAY dans \emph{reso.examples.gobackn.GoBackNSenderApp.java} avant l'envoi de l'ACK.
+\item \textbf{Non-envoi de certains ACK.}\\
+L'envoie de l'ACK correspondant est annulé.
+\item \textbf{Perte de certains paquets.}\\
+L'application agit comme si elle n'avait rien reçu.
+\item \textbf{Certains paquets seront traités comme étant corrompus.}\\
+L'application renvoie l'ACK correspondant au dernier paquet vérifié.
+\end{itemize}
+\subsection{Go-back-N}
+\subsection{Contrôle de congestion}
 \section{Utilisation de l'application}
 \subsection{Lancement de l'application}
-Pour démarrer l'application, lancer le fichier Main.java du package \emph{reso.examples.gobackn}.
+Pour démarrer l'application, lancer le fichier Main.java du package \emph{reso.examples.gobackn}  .
 \subsection{Paramètres modifiables}
 \begin{itemize}
 \item \emph{reso.examples.gobackn.GoBackNReceiverApp.java}
@@ -47,5 +67,6 @@ La variable NUMBER\_ OF\_ EVENT sert principalement à augmenter/réduire toutes
 \end{itemize}
 \end{itemize}
 \subsection{Comportement de l'application}
-Une fois démarrée, une série de log s'afficheront dans la console, détaillant étape par étape l'échange de paquet au sein de l'application.
+Une fois démarrée, une série de log s'afficheront dans la console, détaillant étape par étape l'échange de paquet au sein de l'application.\\
+Un fichier \emph{log.txt} sera créé au même niveau que \emph{reso.examples.gobackn.Main.java} contenant les données nécessaire au plotting des résultats.
 \end{document}
