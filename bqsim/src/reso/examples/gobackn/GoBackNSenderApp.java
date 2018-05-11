@@ -8,10 +8,11 @@ import reso.scheduler.AbstractScheduler;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TimerTask;
-
 public class GoBackNSenderApp extends GoBackNApp
 {
     public static final long TIMEOUT_DELAY = 2500;
@@ -25,7 +26,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private int windowEndIndex = 1;
     private int windowSize = 1;
     private int badACKCount = 0;
-    private final int MSG_AMMOUNT = 10000;
+    private final int MSG_AMMOUNT = 1000;
     private final double SENDING_DELAY = 0.1;
 
 
@@ -39,6 +40,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private final String EVENT_TRIPLE_ACK = "3 duplicate ACKs received > send again from window start";
     private final String EVENT_TIMEOUT = "Packet timeout > send again from window start";
     private PrintWriter writer ;
+    private Instant beginTime;
 
     public GoBackNSenderApp(IPHost host, IPAddress dst) {
         super(host, dst);
@@ -50,6 +52,7 @@ public class GoBackNSenderApp extends GoBackNApp
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        beginTime= Instant.now();
     }
 
 
@@ -118,7 +121,8 @@ public class GoBackNSenderApp extends GoBackNApp
                 confirmWindow();
             windowEndIndex = seqN + windowSize;
             badACKCount = 0;
-            writer.println("" + seqN + " " + windowSize);
+            double deltaTime = Duration.between(beginTime, Instant.now()).getSeconds();
+            writer.println("" + deltaTime + " " + windowSize);
         }
         else{
             badACKCount += 1;

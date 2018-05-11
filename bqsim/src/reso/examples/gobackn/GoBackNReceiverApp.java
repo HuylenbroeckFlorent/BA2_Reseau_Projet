@@ -12,12 +12,12 @@ public class GoBackNReceiverApp extends GoBackNApp{
     private static final String LOG_PACKET_RECEIVED = "Packet received: ";
 
     // Unexpected events probability (PROB_X / NUMBER_OF_EVENT)
-    private static final int PROB_ACK_NOT_SENT = 5;
-    private static final int PROB_ACK_DELAYED = 15;
-    private static final int PROB_ACK_TIMED_OUT = 3;
-    private static final int PROB_PACKET_LOST = 3;
-    private static final int PROB_PACKET_CORRUPTED = 3;
-    private static final int NUMBER_OF_EVENT = 100;
+    private static final int PROB_ACK_NOT_SENT = 1;
+    private static final int PROB_ACK_DELAYED = 950;
+    private static final int PROB_ACK_TIMED_OUT = 1;
+    private static final int PROB_PACKET_LOST = 1;
+    private static final int PROB_PACKET_CORRUPTED = 1;
+    private static final int NUMBER_OF_EVENT = 1000;
 
     // Small delay range (in ms)
     private static final int SMALL_DELAY_RANGE_MIN = 50;
