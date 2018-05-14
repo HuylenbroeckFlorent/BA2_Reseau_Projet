@@ -27,38 +27,56 @@ Faculté des Sciences, Université de Mons}
 \newpage
 \section{Implémentation}
 \subsection{L'application}
+L'application de base est implémentée dans le package \emph{reso.examples.gobackn} comme demandé dans les consignes.
 \subsection{Génération d'évènements aléatoires}
-Problèmes simulés aléatoirement (voir "Paramètres modifiables" pour les probabilités de ceux-ci) et comportement de l'application lorsqu'il surviennent:
+Problèmes simulés aléatoirement (voir "Paramètres modifiables" pour les probabilités de ceux-ci) et comportement de l'application lorsqu'ils surviennent:
 \begin{itemize}
 \item \textbf{Ajout d'un court délai à certains ACK.}\\
 Le thread est endormi pendant un nombre paramétrable de millisecondes avant l'envoi de l'ACK.
 \item \textbf{Ajout d'un délai supérieur à la valeur du timeout à certains ACK.}\\
-Le thread est endormi pendant un nombre non-paramétrable de millisecondes (correspondant au\\ TIMEOUT\_ DELAY dans \emph{reso.examples.gobackn.GoBackNSenderApp.java} avant l'envoi de l'ACK.
+Le thread est endormi pendant un nombre non-paramétrable de millisecondes (correspondant au\\ TIMEOUT\_ DELAY dans \emph{reso.examples.gobackn.GoBackNSenderApp.java} avant l'envoi de l'ACK).
 \item \textbf{Non-envoi de certains ACK.}\\
-L'envoie de l'ACK correspondant est annulé.
+L'envoi de l'ACK correspondant est annulé.
 \item \textbf{Perte de certains paquets.}\\
 L'application agit comme si elle n'avait rien reçu.
 \item \textbf{Certains paquets seront traités comme étant corrompus.}\\
 L'application renvoie l'ACK correspondant au dernier paquet vérifié.
 \end{itemize}
 \subsection{Go-back-N}
+L'envoyeur envoie un paquet toutes les 100ms tant qu'il reste de la place dans la fenêtre et n'attend pas les ACK. La taille initiale de la fenêtre est de 1 (paramètrable). Le destinataire reçoit et traite les paquets un par un. Le numéro de séquence du paquet attendu est gardé dans une variable et un ACK avec le numéro du paquet est envoyé si ce paquet ainsi que tous les précédents ont bien été reçus.
 \subsection{Contrôle de congestion}
+\begin{itemize}
+\item \textbf{Additive increase : }une fois le seuil du slow start atteint (slowStartThreshold), l'additive increase le remplace. À chaque fois qu'une fenêtre entière a été "acknowledgée" la taille de la fenêtre est incrémentée de 1.
+\item \textbf{Slow Start : }La taille de la fenêtre est incrémentée de 1 à chaque ACK reçu. Une fois le seuil (slowStartThreshold) atteint, la stratégie utilisée devient Additive increase. Le seuil initial est paramétrable (voir "Paramètres modifiables").
+\item \textbf{Packet Timeout : }On considère qu'un paquet est perdu après 1 seconde sans avoir reçu son ACK (paramètrable). En cas d'ACK non reçu ou reçu après 1 seconde à partir de l'envoi du paquet, un timeout est lancé et s'applique la procédure suivante:
+\begin{itemize}
+\item Le slowStartThreshold est maintenant égal à la moitié de la taille de la fenêtre. 
+\item La taille de la fenêtre est réinitialisée à 1.
+\item Le slow start est activé.
+\end{itemize}
+\item \textbf{Triple ACK dupliqué : }Cette situation arrive en cas de paquet corrompu ou de paquet n'arrivant jamais au receveur. Celui-ci, attendant un certain paquet, renverra jusqu'à 3 fois le même ACK pour signaler que le paquet suivant n'a toujours pas été reçu. Quand l'envoyeur reçoit 3 ACK dupliqués, la taille de la fenêtre et le slowStartThreshold sont divisés par 2, le slow start est également désactivé et on passe en additive increase.
+\end{itemize}
 \section{Utilisation de l'application}
 \subsection{Lancement de l'application}
-Pour démarrer l'application, lancer le fichier Main.java du package \emph{reso.examples.gobackn}  .
+Pour démarrer l'application, lancer le fichier Main.java du package \emph{reso.examples.gobackn}  .\\
+Pour cela, se placer dans le dossier src/ et lancer la commande suivante :
+\begin{center}
+\emph{javac reso/examples/gobackn/Main.java} \&\& \emph{java reso.examples.gobackn.Main}
+\end{center}
 \subsection{Paramètres modifiables}
 \begin{itemize}
 \item \emph{reso.examples.gobackn.GoBackNReceiverApp.java}
 \begin{itemize}
 \item NUMBER\_ OF\_ EVENT et les variables commençant par PROB\_ permettent de modifier les probabilités que des évènements inattendus se produisent, selon la formule : \[\frac{\text{PROB\_ EVENT}}{\text{NUMBER\_ OF\_ EVENT}}\]\\
-\emph{exemple} : Si l'on souhaite que $5\%$ des ACK ne soient pas envoyés,\\ PROB\_ ACK\_ NOT\_ SENT=5; et NUMBER\_ OF\_ EVENT=100;\\\\
+\emph{Exemple} : Si l'on souhaite que $5\%$ des ACK ne soient pas envoyés,\\ PROB\_ ACK\_ NOT\_ SENT=5; et NUMBER\_ OF\_ EVENT=100;\\\\
 La variable NUMBER\_ OF\_ EVENT sert principalement à augmenter/réduire toutes les probabilités en une seule fois.
-\item SMALL\_ DELAY\_ RANGE\_ MIN et SMALL\_ DELAY\_ RANGE\_ MAX correspondent à l'intervalle dans lequel sera choisi les petits délais aléatoires avant d'envoyer certains ACK.\\
+\item SMALL\_ DELAY\_ RANGE\_ MIN et SMALL\_ DELAY\_ RANGE\_ MAX correspondent à l'intervalle dans lequel seront choisis les petits délais aléatoires avant d'envoyer certains ACK.\\
 \end{itemize}
 \item \emph{reso.examples.gobackn.GoBackNSenderApp.java}
 \begin{itemize}
 \item TIMEOUT\_ DELAY modifie le délai avant un timeout.
 \item PACKET\_ SENT modifie le nombre de paquets à envoyer.
+\item slowStartThreshold modifie le seuil initial.
 \end{itemize}
 \item \emph{reso.examples.gobackn.Main.java}
 \begin{itemize}
@@ -67,6 +85,7 @@ La variable NUMBER\_ OF\_ EVENT sert principalement à augmenter/réduire toutes
 \end{itemize}
 \end{itemize}
 \subsection{Comportement de l'application}
-Une fois démarrée, une série de log s'afficheront dans la console, détaillant étape par étape l'échange de paquet au sein de l'application.\\
-Un fichier \emph{log.txt} sera créé au même niveau que \emph{reso.examples.gobackn.Main.java} contenant les données nécessaire au plotting des résultats.
+Une fois démarrée, une série de logs s'afficheront dans la console, détaillant étape par étape l'échange de paquets au sein de l'application.\\
+Un fichier \emph{log.txt} sera créé au même niveau que \emph{reso.examples.gobackn.Main.java} contenant les données nécessaires au plotting des résultats.
+(\emph{Nous assumons que l'utilisateur de l'application voulant mettre les résultats en graphique sait se servir d'un logiciel de plotting}).
 \end{document}
