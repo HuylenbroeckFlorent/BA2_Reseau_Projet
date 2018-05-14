@@ -33,7 +33,7 @@ public class GoBackNSenderApp extends GoBackNApp
     private int confirmWindow = 1;
     private boolean slowStart = true;
     private final String SLOW_START= "### SLOW START ###";
-    private int slowStartThreshold = 7;
+    private int slowStartThreshold = 9;
     private final String ADD_INCREASE = "### ADDITIVE INCREASE ###";
     private final String EVENT_TRIPLE_ACK = "3 duplicate ACKs received > send again from window start";
     private final String EVENT_TIMEOUT = "Packet timeout > send again from window start";
